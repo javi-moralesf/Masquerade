@@ -42,7 +42,7 @@ public class ListFragment extends Fragment {
                 "MILF de la playa"
         };
 
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new ListAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
 

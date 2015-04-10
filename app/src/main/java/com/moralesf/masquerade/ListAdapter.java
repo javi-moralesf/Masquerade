@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private String[] mDataset;
 
-    public MyAdapter(String[] myDataset) {
+    public ListAdapter(String[] myDataset) {
         mDataset = myDataset;
     }
 
