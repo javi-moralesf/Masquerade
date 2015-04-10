@@ -16,6 +16,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewChatActivity"
+            android:label="@string/title_activity_new_chat"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.moralesf.masquerade.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.moralesf.masquerade.MainActivity" />
+        </activity>
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".data.MasqueradeProvider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
