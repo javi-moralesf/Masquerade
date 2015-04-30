@@ -4,7 +4,18 @@
     <string name="action_settings">Settings</string>
     <string name="action_new_chat">New chat</string>
     <string name="title_activity_new_chat">New Masquerade</string>
-    <string name="new_chat_created">A new Masquerade has been created!</string>
+    <string name="new_chat_created">Create a Masquerade</string>
     <string name="set_chat_name">Set a name for this Masquerade</string>
     <string name="title_activity_chat">Private Masquerade</string>
+    <string name="content_authority">com.moralesf.masquerade</string>
+    <string name="action_chat_rename">Rename chat</string>
+    <string name="api_host">http://getmasquerade.com</string>
+    <string name="action_joint">Join</string>
+    <string name="action_join">Join</string>
+    <string name="title_activity_join">Join Masquerade</string>
+    <string name="join_text">Join a Masquerade</string>
+    <string name="join_insert_code">Insert code</string>
+    <string name="join_submit">Join</string>
+    <string name="invalid_key">Invalid key entered. The key must have 10 characters.</string>
+    <string name="mask_submit">Create</string>
 </resources>

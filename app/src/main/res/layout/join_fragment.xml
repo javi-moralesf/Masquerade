@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:fillViewport="true"
+    tools:context="com.moralesf.masquerade.android.Mask.MaskFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            >
+            <EditText
+                android:id="@+id/chat_key"
+                android:hint="@string/join_insert_code"
+                android:textColorHint="@color/text"
+                android:textSize="30sp"
+                android:layout_width="wrap_content"
+                android:minWidth="200dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/key_bg"
+
+                android:padding="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:gravity="center"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:imeOptions="actionDone"
+                android:textCursorDrawable="@null"
+                android:elevation="2dp"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/mask"
+            android:elevation="2dp"
+            />
+
+        <TextView
+            android:text="@string/set_chat_name"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            >
+            <EditText
+                android:id="@+id/join_chat_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:hint="22/12/2011 18:05:37"
+                android:gravity="center|bottom"
+                android:singleLine="true"
+                android:textColor="@color/text_secondary"
+                android:maxLength="40"
+                android:imeOptions="actionDone"
+                />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/join_submit"
+                android:textSize="30sp"
+                android:text="@string/join_submit"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_height="wrap_content"
+                android:background="@drawable/key_bg"
+                android:padding="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:elevation="2dp"
+                />
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>

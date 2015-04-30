@@ -2,13 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moralesf.masquerade" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.moralesf.masquerade.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.moralesf.masquerade.gcm.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".android.List.ListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,26 +28,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewChatActivity"
+            android:name=".android.Mask.MaskActivity"
             android:label="@string/title_activity_new_chat"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".android.List.ListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moralesf.masquerade.MainActivity" />
+                android:value=".android.List.ListActivity" />
         </activity>
         <activity
-            android:name=".ChatActivity"
+            android:name=".android.Chat.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".android.List.ListActivity"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moralesf.masquerade.MainActivity" />
+                android:value=".android.List.ListActivity" />
         </activity>
+        <activity android:name=".android.data.AndroidDatabaseManager" />
+
         <provider
+            android:name=".android.data.MasqueradeProvider"
             android:authorities="@string/content_authority"
-            android:name=".data.MasqueradeProvider"
             android:exported="false"
             android:syncable="true" />
+
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.moralesf.masquerade.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GcmIntentService" />
+
+        <activity
+            android:name=".android.Join.JoinActivity"
+            android:label="@string/title_activity_join"
+            android:parentActivityName=".android.List.ListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.moralesf.masquerade.android.List.ListActivity" />
+        </activity>
     </application>
 
 </manifest>
