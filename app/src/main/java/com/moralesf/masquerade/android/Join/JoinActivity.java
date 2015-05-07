@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.flurry.android.FlurryAgent;
+import com.moralesf.masquerade.FlurryHelper;
 import com.moralesf.masquerade.R;
 
 public class JoinActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FlurryAgent.init(this, FlurryHelper.APIKEY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_activity);
     }

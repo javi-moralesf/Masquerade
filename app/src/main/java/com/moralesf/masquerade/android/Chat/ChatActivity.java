@@ -10,7 +10,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+import com.moralesf.masquerade.FlurryHelper;
+import com.moralesf.masquerade.GcmIntentService;
 import com.moralesf.masquerade.R;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 
@@ -19,6 +23,7 @@ public class ChatActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FlurryAgent.init(this, FlurryHelper.APIKEY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity);
     }
@@ -40,7 +45,9 @@ public class ChatActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //startActivity(new Intent(this, AndroidDatabaseManager.class));
+            Toast.makeText(this, getString(R.string.author)
+                    , Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -71,5 +78,23 @@ public class ChatActivity extends ActionBarActivity {
     public static void startActivity(Context context, String title, String key, long mask_id, int api_mask_id){
         Intent intent = createIntent(context, title, key, mask_id, api_mask_id);
         context.startActivity(intent);
+    }
+
+    public static void markAsRead(Context context, long id) {
+        ContentValues values = new ContentValues();
+        values.put(MasqueradeContract.ChatEntry.COLUMN_READED, 1);
+
+        ContentResolver contentResolver = context.getContentResolver();
+        String where = "_id="+id;
+        contentResolver.update(MasqueradeContract.ChatEntry.CONTENT_URI, values, where, null);
+    }
+
+    public static void markAsSync(Context context, long id) {
+        ContentValues values = new ContentValues();
+        values.put(MasqueradeContract.ChatEntry.COLUMN_SYNC, 1);
+
+        ContentResolver contentResolver = context.getContentResolver();
+        String where = "_id="+id;
+        contentResolver.update(MasqueradeContract.ChatEntry.CONTENT_URI, values, where, null);
     }
 }

@@ -1,5 +1,6 @@
 package com.moralesf.masquerade.java.Key;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,28 +10,28 @@ public class KeyGen implements KeyGenInterface {
 
     private Random random = null;
     private String key;
+    private int length;
 
-    public KeyGen(){
+    public KeyGen(int length){
+        this.length = length;
         this.random = new Random();
-        key = Long.toString(System.currentTimeMillis());
-        key = key.substring(2, 10);
-        key = generateDifficulty(key, 2);
+        key = generateDifficulty(length);
     }
 
-    private String generateDifficulty(String key, int difficultyLevel) {
+    private String generateDifficulty(int difficultyLevel) {
+        String new_key = "";
         for(int i = 0; i < difficultyLevel; i++){
-            String new_character = generateRandomAlphabet();
-            int new_position = this.random.nextInt(key.length() - 1);
-            key = new StringBuilder(key).insert(new_position, new_character).toString();
+            String new_char = generateRandomAlphabet();
+            new_key = new StringBuilder(new_key)
+                    .append(new_char)
+                    .toString();
         }
-        return key;
+        return new_key;
     }
 
     public String generateRandomAlphabet() {
-        String alphabet = null;
-
         char character = (char) (97 + this.random.nextInt(26));
-        alphabet = String.valueOf(character);
+        String alphabet = String.valueOf(character);
         if(this.random.nextInt() == 1){
             alphabet = alphabet.toUpperCase();
         }
@@ -42,4 +43,9 @@ public class KeyGen implements KeyGenInterface {
         return this.key;
     }
 
+    public void setFalsePositives(ArrayList<String> falsePositives) {
+        while(falsePositives.contains(this.key)){
+            key = generateDifficulty(length);
+        }
+    }
 }

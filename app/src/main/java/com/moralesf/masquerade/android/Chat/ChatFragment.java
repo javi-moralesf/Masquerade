@@ -12,7 +12,6 @@ import android.support.v4.content.Loader;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,11 +21,15 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.ApiHelper;
 import com.moralesf.masquerade.R;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 import com.moralesf.masquerade.java.Api.Chat.ChatSendRequest;
 import com.moralesf.masquerade.java.Api.Chat.ChatSendResponse;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import rx.functions.Action1;
 
@@ -38,13 +41,16 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static final String TAG = "ChatFragment";
     private RecyclerView chatRecyclerView;
-    private RecyclerView.Adapter chatAdapter;
+    private ChatAdapter chatAdapter;
     private LinearLayoutManager chatLayoutManager;
     private String keygen;
     private long mask_id;
     private int mask_api_id;
+    private EditText edit_txt;
+    private ApiHelper apiHelper;
 
     private static final int CHAT_LOADER = 0;
+    private static final int MASK_LOADER = 1;
 
     public ChatFragment() {
     }
@@ -54,6 +60,8 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
                              Bundle savedInstanceState) {
 
         Intent intent = getActivity().getIntent();
+
+        apiHelper = new ApiHelper(getActivity());
 
         View rootView = inflater.inflate(R.layout.chat_fragment, container, false);
         if(intent != null && intent.hasExtra(Intent.EXTRA_TITLE)){
@@ -70,10 +78,13 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
         chatLayoutManager.setStackFromEnd(true);
         chatRecyclerView.setLayoutManager(chatLayoutManager);
 
-        final EditText edit_txt = (EditText) rootView.findViewById(R.id.new_chat_chat_title);
+        edit_txt = (EditText) rootView.findViewById(R.id.new_chat_chat_title);
         edit_txt.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (!edit_txt.isFocusable()) {
+                    return false;
+                }
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     sendMessage(edit_txt.getText().toString());
                     edit_txt.setText("");
@@ -93,9 +104,9 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (edit_txt.getRight() - edit_txt.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        sendMessage(edit_txt.getText().toString());
-                        edit_txt.setText("");
-                        return true;
+                        FlurryAgent.logEvent("chat_send_button_image");
+                        edit_txt.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                        return false;
                     }
                 }
                 return false;
@@ -104,9 +115,6 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
 
         if(intent != null && intent.hasExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID)){
             mask_id = intent.getLongExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, 0L);
-        }
-        if(intent != null && intent.hasExtra(MasqueradeContract.MaskEntry.COLUMN_API_ID)){
-            mask_api_id = intent.getIntExtra(MasqueradeContract.MaskEntry.COLUMN_API_ID, 0);
         }
 
         return rootView;
@@ -118,23 +126,33 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     public void sendMessage(String text){
+        if(text.length() == 0){
+            return;
+        }
+
+        FlurryAgent.logEvent("chat_sent");
+
         ContentValues values = new ContentValues();
         values.put(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, mask_id);
-        values.put(MasqueradeContract.ChatEntry.COLUMN_MINE, 1);
+        values.put(MasqueradeContract.ChatEntry.COLUMN_TYPE, 1);
         values.put(MasqueradeContract.ChatEntry.COLUMN_TEXT, text);
-        values.put(MasqueradeContract.ChatEntry.COLUMN_USER_ID, 1);
+        values.put(MasqueradeContract.ChatEntry.COLUMN_USER_ID, apiHelper.getUserId());
+        values.put(MasqueradeContract.ChatEntry.COLUMN_READED, 1);
 
         ContentResolver contentResolver = getActivity().getContentResolver();
-        contentResolver.insert(MasqueradeContract.ChatEntry.CONTENT_URI, values);
+        Uri insert = contentResolver.insert(MasqueradeContract.ChatEntry.CONTENT_URI, values);
 
-        ApiHelper apiHelper = new ApiHelper(getActivity());
+        Cursor inserted_row = contentResolver.query(insert, null, null, null, null);
+        inserted_row.moveToFirst();
+        final long internal_id = inserted_row.getLong(MasqueradeContract.ChatEntry.INDEX_COLUMN_ID);
+
         String token = apiHelper.getToken();
 
         apiHelper.getApi().chatSend(token, new ChatSendRequest(mask_api_id, text))
                 .subscribe(new Action1<ChatSendResponse>() {
                     @Override
                     public void call(ChatSendResponse response) {
-                        //TODO:Add icon to see difference between sended or pending to send
+                        ChatActivity.markAsSync(getActivity(), internal_id);
                     }
                 });
     }
@@ -142,21 +160,38 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(CHAT_LOADER, null, this);
+        getLoaderManager().initLoader(MASK_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri chatUri = MasqueradeContract.ChatEntry.buildChatUri(
-                mask_id);
+        Uri uri = null;
+        switch (id){
+            case CHAT_LOADER:
+                uri = MasqueradeContract.ChatEntry.buildChatUri(mask_id);
+                break;
+            case MASK_LOADER:
+                uri = MasqueradeContract.MaskEntry.buildChatByIdUri(mask_id);
+                break;
+        }
 
-        return new CursorLoader(getActivity(), chatUri, null, null, null, null);
+        return new CursorLoader(getActivity(), uri, null, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        chatAdapter = new ChatAdapter(getActivity(), data);
-        chatRecyclerView.setAdapter(chatAdapter);
+        switch (loader.getId()){
+            case CHAT_LOADER:
+                chatAdapter = new ChatAdapter(getActivity(), data, apiHelper, edit_txt);
+                chatRecyclerView.setAdapter(chatAdapter);
+                break;
+            case MASK_LOADER:
+                data.moveToFirst();
+                mask_api_id = data.getInt(MasqueradeContract.MaskEntry.INDEX_COLUMN_API_ID);
+                break;
+        }
+
     }
 
     @Override

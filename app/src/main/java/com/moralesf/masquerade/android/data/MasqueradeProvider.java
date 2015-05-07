@@ -20,8 +20,11 @@ public class MasqueradeProvider extends ContentProvider {
 
     static final int MASK = 100;
     static final int MASK_WITH_API_ID = 101;
+    static final int MASK_WITH_KEY = 102;
+    static final int MASK_WITH_ID = 103;
     static final int CHAT = 200;
     static final int CHAT_WITH_MASK = 201;
+    static final int CHAT_WITH_ID = 202;
 
     private static final SQLiteQueryBuilder sChatQueryBuilder;
     private static final SQLiteQueryBuilder sMaskQueryBuilder;
@@ -40,10 +43,26 @@ public class MasqueradeProvider extends ContentProvider {
     private static final String sChatMaskSelection =
             MasqueradeContract.ChatEntry.TABLE_NAME+
                     "." + MasqueradeContract.ChatEntry.COLUMN_MASK_ID + " = ? ";
-    //mask.mask_id = ?
-    private static final String sMaskIdSelection =
+    //chat._id = ?
+    private static final String sChatIdSelection =
+            MasqueradeContract.ChatEntry.TABLE_NAME+
+                    "._id = ? ";
+    //mask.id = ?
+    private static final String sMaskApiIdSelection =
             MasqueradeContract.MaskEntry.TABLE_NAME+
                     "." + MasqueradeContract.MaskEntry.COLUMN_API_ID + " = ? ";
+    //mask._id = ?
+    private static final String sMaskIdSelection =
+            MasqueradeContract.MaskEntry.TABLE_NAME+
+                    "._id = ? ";
+    //mask.keygen = ?
+    private static final String sMaskKeySelection =
+            MasqueradeContract.MaskEntry.TABLE_NAME+
+                    "." + MasqueradeContract.MaskEntry.COLUMN_KEYGEN + " = ? ";
+    //mask.deleted = 0
+    private static final String sMaskNotDeletedSelection =
+            MasqueradeContract.MaskEntry.TABLE_NAME+
+                    "." + MasqueradeContract.MaskEntry.COLUMN_DELETED + " = 0 ";
 
     private Cursor getChatByMask(Uri uri, String[] projection, String sortOrder) {
         String mask_id = MasqueradeContract.ChatEntry.getMaskFromUri(uri);
@@ -63,10 +82,49 @@ public class MasqueradeProvider extends ContentProvider {
                 null,
                 sortOrder
         );
-    }   
+    }
+
+    private Cursor getChatById(Uri uri, String[] projection, String sortOrder) {
+        String id = MasqueradeContract.ChatEntry.getIdFromUri(uri);
+
+        String[] selectionArgs;
+        String selection;
+
+        selection = sChatIdSelection;
+        selectionArgs = new String[]{id};
+
+
+        return sChatQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+    }
     
     private Cursor getMaskByApiId(Uri uri, String[] projection, String sortOrder) {
         String mask_id = MasqueradeContract.MaskEntry.getApiIdFromUri(uri);
+
+        String[] selectionArgs;
+        String selection;
+
+        selection = sMaskApiIdSelection;
+        selectionArgs = new String[]{mask_id};
+
+
+        return sMaskQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+    }
+    private Cursor getMaskById(Uri uri, String[] projection, String sortOrder) {
+        String mask_id = MasqueradeContract.MaskEntry.getIdFromUri(uri);
 
         String[] selectionArgs;
         String selection;
@@ -84,6 +142,43 @@ public class MasqueradeProvider extends ContentProvider {
                 sortOrder
         );
     }
+    private Cursor getMaskByKey(Uri uri, String[] projection, String sortOrder) {
+        String keygen = MasqueradeContract.MaskEntry.getKeygenFromUri(uri);
+
+        String[] selectionArgs;
+        String selection;
+
+        selection = sMaskKeySelection;
+        selectionArgs = new String[]{keygen};
+
+
+        return sMaskQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+    }
+
+    private Cursor getMasks(Uri uri, String[] projection, String sortOrder) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+
+
+        /*final String SQL_STATEMENT = "SELECT DISTINCT"+MasqueradeContract.MaskEntry.TABLE_NAME+".*, COUNT COUNT(*) FROM "+ MasqueradeContract.MaskEntry.TABLE_NAME+
+                " WHERE uname=? AND pwd=?";*/
+
+        final String SQL_STATEMENT ="SELECT "+MasqueradeContract.MaskEntry.TABLE_NAME+".*, (COUNT("+MasqueradeContract.ChatEntry.TABLE_NAME+"."+ MasqueradeContract.ChatEntry.COLUMN_READED+") - SUM("+MasqueradeContract.ChatEntry.TABLE_NAME+"."+ MasqueradeContract.ChatEntry.COLUMN_READED+")) AS unread_messages FROM ("+MasqueradeContract.MaskEntry.TABLE_NAME+
+                " INNER JOIN "+MasqueradeContract.ChatEntry.TABLE_NAME+
+                " ON "+MasqueradeContract.MaskEntry.TABLE_NAME+"._id="+MasqueradeContract.ChatEntry.TABLE_NAME+"."+MasqueradeContract.ChatEntry.COLUMN_MASK_ID+")"+
+                " WHERE "+MasqueradeContract.MaskEntry.TABLE_NAME+"."+ MasqueradeContract.MaskEntry.COLUMN_DELETED+"=0"+
+                " GROUP BY "+MasqueradeContract.MaskEntry.TABLE_NAME+".id";
+
+
+        return db.rawQuery(SQL_STATEMENT, null);
+
+    }
 
 
 
@@ -93,8 +188,11 @@ public class MasqueradeProvider extends ContentProvider {
 
         // For each type of URI you want to add, create a corresponding code.
         matcher.addURI(authority, MasqueradeContract.PATH_MASK, MASK);
+        matcher.addURI(authority, MasqueradeContract.PATH_MASK+ "/key/*", MASK_WITH_KEY);
+        matcher.addURI(authority, MasqueradeContract.PATH_MASK+ "/id/*", MASK_WITH_ID);
         matcher.addURI(authority, MasqueradeContract.PATH_MASK+ "/*", MASK_WITH_API_ID);
         matcher.addURI(authority, MasqueradeContract.PATH_CHAT, CHAT);
+        matcher.addURI(authority, MasqueradeContract.PATH_CHAT + "/id/*", CHAT_WITH_ID);
         matcher.addURI(authority, MasqueradeContract.PATH_CHAT + "/*", CHAT_WITH_MASK);
         return matcher;
     }
@@ -132,22 +230,29 @@ public class MasqueradeProvider extends ContentProvider {
                 retCursor = getChatByMask(uri, projection, sortOrder);
                 break;
             }
+            // "chat/id/*"
+            case CHAT_WITH_ID: {
+                retCursor = getChatById(uri, projection, sortOrder);
+                break;
+            }
             // "mask/*"
             case MASK_WITH_API_ID: {
                 retCursor = getMaskByApiId(uri, projection, sortOrder);
                 break;
             }
+            // "mask/*"
+            case MASK_WITH_ID: {
+                retCursor = getMaskById(uri, projection, sortOrder);
+                break;
+            }
+            // "mask/key/*"
+            case MASK_WITH_KEY: {
+                retCursor = getMaskByKey(uri, projection, sortOrder);
+                break;
+            }
             // "mask"
             case MASK: {
-                retCursor = mOpenHelper.getReadableDatabase().query(
-                        MasqueradeContract.MaskEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
+                retCursor = getMasks(uri, projection, sortOrder);
                 break;
             }
             default:
@@ -156,6 +261,9 @@ public class MasqueradeProvider extends ContentProvider {
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
     }
+
+
+
 
     /*
         Student: Add the ability to insert Locations to the implementation of this function.
@@ -170,7 +278,7 @@ public class MasqueradeProvider extends ContentProvider {
             case MASK: {
                 long _id = db.insert(MasqueradeContract.MaskEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
-                    returnUri = MasqueradeContract.MaskEntry.CONTENT_URI;
+                    returnUri = Uri.parse(MasqueradeContract.MaskEntry.CONTENT_URI+"/id/"+String.valueOf(_id));
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -178,15 +286,17 @@ public class MasqueradeProvider extends ContentProvider {
             case CHAT: {
                 long _id = db.insert(MasqueradeContract.ChatEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
-                    returnUri = MasqueradeContract.ChatEntry.CONTENT_URI;
+                    returnUri = Uri.parse(MasqueradeContract.ChatEntry.CONTENT_URI+"/id/"+String.valueOf(_id));
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
+
+                getContext().getContentResolver().notifyChange(MasqueradeContract.MaskEntry.CONTENT_URI, null);
                 break;
             }
             case CHAT_WITH_MASK: {
                 long _id = db.insert(MasqueradeContract.ChatEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
-                    returnUri = MasqueradeContract.ChatEntry.CONTENT_URI;
+                    returnUri = Uri.parse(MasqueradeContract.ChatEntry.CONTENT_URI+"/id/"+String.valueOf(_id));
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -232,6 +342,13 @@ public class MasqueradeProvider extends ContentProvider {
             case MASK:
                 rowsUpdated = db.update(MasqueradeContract.MaskEntry.TABLE_NAME, values, selection,
                         selectionArgs);
+                break;
+            case CHAT:
+                rowsUpdated = db.update(MasqueradeContract.ChatEntry.TABLE_NAME, values, selection,
+                        selectionArgs);
+                if (rowsUpdated != 0) {
+                    getContext().getContentResolver().notifyChange(MasqueradeContract.MaskEntry.CONTENT_URI, null);
+                }
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

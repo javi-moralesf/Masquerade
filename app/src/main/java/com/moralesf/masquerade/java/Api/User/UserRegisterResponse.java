@@ -5,4 +5,5 @@ public class UserRegisterResponse {
     public String message;
     public String token;
     public int user_id;
+    public String key;
 }

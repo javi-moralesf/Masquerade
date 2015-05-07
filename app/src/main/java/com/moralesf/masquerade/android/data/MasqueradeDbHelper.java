@@ -37,7 +37,9 @@ public class MasqueradeDbHelper extends SQLiteOpenHelper {
                 MaskEntry.COLUMN_API_ID + " INTEGER DEFAULT NULL," +
                 MaskEntry.COLUMN_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 MaskEntry.COLUMN_KEYGEN + " TEXT NOT NULL, " +
-                MaskEntry.COLUMN_TITLE + " TEXT NOT NULL " +
+                MaskEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
+                MaskEntry.COLUMN_SYNC + " INTEGER DEFAULT 0," +
+                MaskEntry.COLUMN_DELETED + " INTEGER DEFAULT 0" +
                 " );";
 
         final String SQL_CREATE_CHAT_TABLE = "CREATE TABLE " + ChatEntry.TABLE_NAME + " (" +
@@ -52,8 +54,10 @@ public class MasqueradeDbHelper extends SQLiteOpenHelper {
                 ChatEntry.COLUMN_MASK_ID + " INTEGER NOT NULL, " +
                 ChatEntry.COLUMN_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 ChatEntry.COLUMN_TEXT + " TEXT NOT NULL, " +
-                ChatEntry.COLUMN_MINE + " INTEGER NOT NULL," +
+                ChatEntry.COLUMN_TYPE + " INTEGER NOT NULL," +
                 ChatEntry.COLUMN_USER_ID + " INTEGER NOT NULL," +
+                ChatEntry.COLUMN_READED + " INTEGER DEFAULT 0," +
+                ChatEntry.COLUMN_SYNC + " INTEGER DEFAULT 0," +
 
                 // Set up the mask_id column as a foreign key to mask table.
                 " FOREIGN KEY (" + ChatEntry.COLUMN_MASK_ID + ") REFERENCES " +
@@ -118,5 +122,14 @@ public class MasqueradeDbHelper extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 }

@@ -7,6 +7,8 @@ import com.moralesf.masquerade.java.Api.Mask.MaskCreateRequest;
 import com.moralesf.masquerade.java.Api.Mask.MaskCreateResponse;
 import com.moralesf.masquerade.java.Api.Mask.MaskJoinRequest;
 import com.moralesf.masquerade.java.Api.Mask.MaskJoinResponse;
+import com.moralesf.masquerade.java.Api.Mask.MaskLeaveRequest;
+import com.moralesf.masquerade.java.Api.Mask.MaskLeaveResponse;
 import com.moralesf.masquerade.java.Api.User.UserRegisterRequest;
 import com.moralesf.masquerade.java.Api.User.UserRegisterResponse;
 
@@ -26,7 +28,9 @@ public interface MasqueradeApi {
     @POST("/mask/join")
     Observable<MaskJoinResponse> maskJoin(@Header("x-auth-token") String authorization, @Body MaskJoinRequest body);
 
+    @POST("/mask/leave")
+    Observable<MaskLeaveResponse> maskLeave(@Header("x-auth-token") String authorization, @Body MaskLeaveRequest body);
+
     @POST("/chat/send")
     Observable<ChatSendResponse> chatSend(@Header("x-auth-token") String authorization, @Body ChatSendRequest body);
-
 }

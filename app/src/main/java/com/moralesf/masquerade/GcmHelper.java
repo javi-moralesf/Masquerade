@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -173,18 +174,47 @@ public class GcmHelper {
     }
 
     private void sendRegistrationIdToBackend(String regid) {
+        String os = getOs();
+        String device_name = getDeviceName();
 
-        this.apiHelper.getApi().userRegister(new UserRegisterRequest(regid, null, null))
-            .subscribe(new Action1<UserRegisterResponse>() {
-                @Override
-                public void call(UserRegisterResponse response) {
-                    if(response.result && response.token.length() > 0 && response.user_id > 0){
-                        apiHelper.setToken(response.token);
-                        apiHelper.setUserId(response.user_id);
-                    }else{
-                        Log.e(TAG, "Something wrong trying to register user on server: "+response.message);
+        this.apiHelper.getApi().userRegister(new UserRegisterRequest(regid, os, device_name))
+                .subscribe(new Action1<UserRegisterResponse>() {
+                    @Override
+                    public void call(UserRegisterResponse response) {
+                        if (response.result && response.token.length() > 0 && response.user_id > 0) {
+                            apiHelper.setToken(response.token);
+                            apiHelper.setUserId(response.user_id);
+                            apiHelper.setKey(response.key);
+                        } else {
+                            Log.e(TAG, "Something wrong trying to register user on server: " + response.message);
+                        }
                     }
-                }
-            });
+                });
+    }
+
+    public String getOs() {
+        return "Android API "+android.os.Build.VERSION.SDK_INT;
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
     }
 }

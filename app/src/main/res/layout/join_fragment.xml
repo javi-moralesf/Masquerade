@@ -33,7 +33,7 @@
                 android:textColor="@color/text"
                 android:gravity="center"
                 android:singleLine="true"
-                android:maxLength="10"
+                android:maxLength="6"
                 android:imeOptions="actionDone"
                 android:textCursorDrawable="@null"
                 android:elevation="2dp"

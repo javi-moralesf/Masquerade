@@ -35,8 +35,23 @@ public class MasqueradeContract {
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_MASK_ID = "mask_id";
         public static final String COLUMN_TEXT = "text";
-        public static final String COLUMN_MINE = "mine";
+        public static final String COLUMN_TYPE = "type";
         public static final String COLUMN_USER_ID = "user_id";
+        public static final String COLUMN_READED = "readed";
+        public static final String COLUMN_SYNC = "sync";
+
+        public static final int INDEX_COLUMN_ID = 0;
+        public static final int INDEX_COLUMN_DATE = 1;
+        public static final int INDEX_COLUMN_MASK_ID = 2;
+        public static final int INDEX_COLUMN_TEXT = 3;
+        public static final int INDEX_COLUMN_TYPE = 4;
+        public static final int INDEX_COLUMN_USER_ID = 5;
+        public static final int INDEX_COLUMN_READED = 6;
+        public static final int INDEX_COLUMN_SYNC = 7;
+
+
+        public static final int CHAT_TYPE_SYSTEM = 2;
+
 
         public static Uri buildChatUri(long id) {
 
@@ -47,6 +62,7 @@ public class MasqueradeContract {
             return uri.getPathSegments().get(1);
         }
 
+        public static String getIdFromUri(Uri uri) { return uri.getPathSegments().get(2); }
     }
 
     /* Inner class that defines the table contents of the mask table */
@@ -68,13 +84,26 @@ public class MasqueradeContract {
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_KEYGEN = "keygen";
         public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_SYNC = "sync";
+        public static final String COLUMN_DELETED = "deleted";
 
         public static final int INDEX_COLUMN_ID = 0;
         public static final int INDEX_COLUMN_API_ID = 1;
-        public static final int INDEX_COLUMN_DATE =2;
+        public static final int INDEX_COLUMN_DATE = 2;
         public static final int INDEX_COLUMN_KEYGEN =3;
         public static final int INDEX_COLUMN_TITLE = 4;
+        public static final int INDEX_COLUMN_SYNC = 5;
+        public static final int INDEX_COLUMN_DELETED = 6;
+
+        public static final int INDEX_COLUMN_RELATION_READ = 7;
 
         public static String getApiIdFromUri(Uri uri) { return uri.getPathSegments().get(1); }
+        public static String getKeygenFromUri(Uri uri) { return uri.getPathSegments().get(2); }
+
+        public static String getIdFromUri(Uri uri) { return uri.getPathSegments().get(2); }
+
+        public static Uri buildChatByIdUri(long mask_id) {
+            return Uri.parse(MasqueradeContract.MaskEntry.CONTENT_URI + "/id/"+mask_id);
+        }
     }
 }

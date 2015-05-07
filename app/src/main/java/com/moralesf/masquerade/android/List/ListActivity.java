@@ -5,8 +5,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.ApiHelper;
+import com.moralesf.masquerade.FlurryHelper;
 import com.moralesf.masquerade.GcmHelper;
 import com.moralesf.masquerade.android.Join.JoinActivity;
 import com.moralesf.masquerade.android.Mask.MaskActivity;
@@ -23,7 +26,10 @@ public class ListActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FlurryAgent.init(this, FlurryHelper.APIKEY);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.list_activity);
 
         ApiHelper api = new ApiHelper(this);
@@ -53,7 +59,9 @@ public class ListActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, AndroidDatabaseManager.class));
+            //startActivity(new Intent(this, AndroidDatabaseManager.class));
+            Toast.makeText(this, getString(R.string.author)
+                    , Toast.LENGTH_LONG).show();
         }
         if (id == R.id.action_new_chat) {
             Intent i = new Intent(this, MaskActivity.class);
