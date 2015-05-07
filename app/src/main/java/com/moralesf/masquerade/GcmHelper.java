@@ -177,7 +177,9 @@ public class GcmHelper {
         String os = getOs();
         String device_name = getDeviceName();
 
-        this.apiHelper.getApi().userRegister(new UserRegisterRequest(regid, os, device_name))
+        String old_token = apiHelper.getToken();
+
+        this.apiHelper.getApi().userRegister(new UserRegisterRequest(regid, os, device_name, old_token ))
                 .subscribe(new Action1<UserRegisterResponse>() {
                     @Override
                     public void call(UserRegisterResponse response) {
