@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Masquerade</string>
+    <string name="action_chat_rename">Renombrar chat</string>
+    <string name="action_join">Unirte</string>
+    <string name="action_joint">Unirte</string>
+    <string name="action_new_chat">Nuevo chat</string>
+    <string name="chat_initial_message">Masquerade!</string>
+    <string name="chat_user_added">Han entrado gente nueva!</string>
+    <string name="chat_waiting_others">Esperando a más gente...</string>
+    <string name="invalid_key">Clave incorrecta. La clave ha de tener al menos 3 dígitos.</string>
+    <string name="join_insert_code">Inserta el código</string>
+    <string name="list_contextual_menu_delete">Eliminar</string>
+    <string name="join_text">Unirte a Masquerade</string>
+    <string name="join_submit">Unirte</string>
+    <string name="list_contextual_menu_rename">Renombrar</string>
+    <string name="list_contextual_menu_view_code">Ver el código</string>
+    <string name="mask_edit_cancel">Cancelar</string>
+    <string name="mask_edit_ok">Guardar</string>
+    <string name="mask_edit_title">Editar el nombre del Masquerade</string>
+    <string name="mask_submit">Crear</string>
+    <string name="mask_view_code">Código de Masquerade</string>
+    <string name="mask_view_ok">Cerrar</string>
+    <string name="new_chat_created">Crear Masquerade</string>
+    <string name="title_activity_chat">Masquerade privada</string>
+    <string name="title_activity_join">Unirte a Masquerade</string>
+    <string name="title_activity_new_chat">Nueva Masquerade</string>
+    <string name="set_chat_name">Ponle un nombre a la Masquerade</string>
+</resources>

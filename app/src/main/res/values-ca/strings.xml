@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Masquerade</string>
+    <string name="action_chat_rename">Renombrar chat</string>
+    <string name="action_join">Unir-te</string>
+    <string name="action_joint">Unir-te</string>
+    <string name="action_new_chat">Nou xat</string>
+    <string name="action_settings">Coneixen's</string>
+    <string name="chat_initial_message">Masquerade!</string>
+    <string name="chat_user_added">Ha entrat gent nova!</string>
+    <string name="chat_waiting_others">Esperant a més gent...</string>
+    <string name="hello_world"></string>
+    <string name="invalid_key">Clau incorrecte. La clau ha de tenir al menys 3 digits.</string>
+    <string name="join_insert_code">Inserta el codi</string>
+    <string name="join_submit">Unir-te</string>
+    <string name="join_text">Unir-te a Masquerade</string>
+    <string name="list_contextual_menu_delete">Eliminar</string>
+    <string name="list_contextual_menu_rename">Renombrar</string>
+    <string name="list_contextual_menu_view_code">Veure la clau</string>
+    <string name="mask_edit_cancel">Cancel·lar</string>
+    <string name="mask_edit_ok">Desar</string>
+    <string name="mask_edit_title">Editar el nom del Masquerade</string>
+    <string name="mask_submit">Crear</string>
+    <string name="mask_view_code">Clau de Masquerade</string>
+    <string name="mask_view_ok">Tancar</string>
+    <string name="new_chat_created">Crear Masquerade</string>
+    <string name="set_chat_name">Tria un nom per a la Masquerade</string>
+    <string name="title_activity_chat">Masquerade privada</string>
+    <string name="title_activity_join">Unir-te a Masquerade</string>
+    <string name="title_activity_new_chat">Nova Masquerade</string>
+</resources>
