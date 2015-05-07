@@ -35,7 +35,7 @@ public class DateParser {
 
     private static String formatHour(Calendar calendar){
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%02d", calendar.get(Calendar.HOUR)));
+        sb.append(String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
         sb.append(":");
         sb.append(String.format("%02d", calendar.get(Calendar.MINUTE)));
         return sb.toString();
