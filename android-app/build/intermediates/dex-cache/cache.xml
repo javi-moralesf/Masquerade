@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-03a14c171f3d0eaa0eca55cf0b1f739395687cad.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-42b3d0ae54f30726cb3a4149528fd4ba9b6a4e84.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.0.0/52c2d7adff160476ee659a19c432a1863f958361/rxjava-1.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="52c2d7adff160476ee659a19c432a1863f958361">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/rxjava-1.0.0-e0b4c6e344dc759c4dc7b99bf9ffe1f9e9f4a69b.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-0972510062ef6925ff451ae6951e543dc8cbb3e5.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-9b63e42f59957f2acdacb2b8d3bbd9eeb5fc0490.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-e2d3d4cd4efa986e2f71480bae967e09cb989764.jar" />
+    </item>
+    <item
+        jar="/android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-9bc05bb259638c967bfd6fe59805e4cf8ec5e882.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/libs/FlurryAnalytics-5.5.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0b458e548cb3a6196b60181134f975116b2ac040">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/FlurryAnalytics-5.5.0-51eb2d957c26ef94898f54c7dc6def1b7897a0da.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-d31b7031e76e4ad89a49966464890dca520117e8.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-a1f43eeb5450585145009d17d31c7268594bb7d5.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-6721fd49978260b3047043ff4f11e0e260b3b454.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-a7469cf402a2654551aa6e8be6b1eddb7bf93a4a.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-87269e74de352c4b6ef09a6126866bbb3ef5ed47.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.viewpagerindicator/library/2.4.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="88e8e18d365173ad04a543d76c157e0b644f0b3f">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-e9031e3b54745601a61ad1719d67ca6173560bde.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-c2b8b3f5460c1a1ab9240db84f733949e05482f8.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-0a829729a57d90e7eeabde81be2f010249ab904c.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-dc70ca01e8140c9244ea2868554a15a590560838.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.0.0/2534c458682c73f5b9871131ab3098d3f987ca3/okio-1.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02534c458682c73f5b9871131ab3098d3f987ca3">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/okio-1.0.0-086cbfa7b119a9bdfc092eeca870a6ecb33f58e9.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/gson-2.3.1-7bc02740316095d8e460249e405080b9c5626415.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-1dd9525b8d2c802c2cbd0bf1bd9e0852a6b7f7f6.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.0.0/4c8d1536dba3812cc1592090dc20c47a4ed3c35e/okhttp-2.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4c8d1536dba3812cc1592090dc20c47a4ed3c35e">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/okhttp-2.0.0-01b9185fc60f7987b3d7557457748f5d4df81be4.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="afe8399d352713b66e597e9670c741d1e60ae923">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-b60d30df68d525e0e72ca544eab41a386434253c.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-1d3bcd89fc02286f7f5c42a934849441c5c037f5.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-dfea74e427a8a1387d16f8a2ed7e607278c6d7b3.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-fda5b6029030de4e38e6d53c862bfa3faf8004c0.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-af83dc618b2a3c85515581fab01fcdceae4db5e7.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-3cae10261f4178a8bff957b818ed9dd828d02667.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-3fabc31a178512fedada213cdacdba487b0a52e1.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-3a648e82e8fd6c33b43c7a4b135d0aaabb8bc499.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-30697d506113a77800af421775111dc236ce470d.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-2324265f859650314ff5504fd1cf92445b24742c.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-8d5365a56ae9d9c0e5e19e3b0029d9f5d967640a.jar" />
+    </item>
+    <item
+        jar="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/Users/javi_moralesf/AndroidStudioProjects/Masquerade/app/build/intermediates/pre-dexed/debug/classes-8d78a4b462d8b4f33bc08c9ebed822d4fa19da63.jar" />
+    </item>
+
+</items>
