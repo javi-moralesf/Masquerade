@@ -1,4 +1,4 @@
-package com.moralesf.masquerade.android.Chat;
+package com.moralesf.masquerade.android.chat;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.FlurryHelper;
-import com.moralesf.masquerade.GcmIntentService;
 import com.moralesf.masquerade.R;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 

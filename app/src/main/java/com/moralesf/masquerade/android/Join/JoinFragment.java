@@ -1,13 +1,11 @@
-package com.moralesf.masquerade.android.Join;
+package com.moralesf.masquerade.android.join;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +16,9 @@ import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.ApiHelper;
 import com.moralesf.masquerade.R;
-import com.moralesf.masquerade.android.Chat.ChatActivity;
+import com.moralesf.masquerade.android.chat.ChatActivity;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
-import com.moralesf.masquerade.java.Api.Mask.MaskCreateRequest;
-import com.moralesf.masquerade.java.Api.Mask.MaskCreateResponse;
+import com.moralesf.masquerade.android.list.ListActivity;
 import com.moralesf.masquerade.java.Api.Mask.MaskJoinRequest;
 import com.moralesf.masquerade.java.Api.Mask.MaskJoinResponse;
 
@@ -86,7 +83,12 @@ public class JoinFragment extends Fragment {
                     c.moveToFirst();
 
                     final long _id = c.getLong(0);
-                    ChatActivity.startActivity(getActivity(), title, key, _id, 0);
+                    if(ListActivity.mTwoPane){
+                        getActivity().finish();
+                    }else{
+                        ChatActivity.startActivity(getActivity(), title, key, _id, 0);
+                    }
+
 
 
                     apiHelper.getApi().maskJoin(token, new MaskJoinRequest(key))

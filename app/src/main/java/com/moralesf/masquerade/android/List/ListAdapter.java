@@ -1,12 +1,10 @@
-package com.moralesf.masquerade.android.List;
+package com.moralesf.masquerade.android.list;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v4.app.Fragment;
-import android.support.v7.internal.widget.AdapterViewCompat;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -17,8 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.moralesf.masquerade.android.Chat.ChatActivity;
+import com.moralesf.masquerade.android.chat.ChatActivity;
 import com.moralesf.masquerade.R;
+import com.moralesf.masquerade.android.chat.ChatFragment;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -26,6 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Context context;
     private Cursor cursor;
     private int position;
+    public int sPosition = -1;
 
     public void setPosition(int position){
         this.position = position;
@@ -134,7 +134,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             intent.putExtra(Intent.EXTRA_UID, keygen);
             intent.putExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, _id);
             intent.putExtra(MasqueradeContract.MaskEntry.COLUMN_API_ID, mask_api_id);
-            v.getContext().startActivity(intent);
+
+            if(ListActivity.mTwoPane){
+                ChatFragment fragment = new ChatFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(Intent.EXTRA_TITLE, chat_title_tv.getText().toString());
+                bundle.putString(Intent.EXTRA_UID, keygen);
+                bundle.putLong(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, _id);
+                bundle.putInt(MasqueradeContract.MaskEntry.COLUMN_API_ID, mask_api_id);
+                fragment.setArguments(bundle);
+                        ((ListActivity) context).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.right_container, fragment, ListActivity.CHATFRAGMENT_TAG)
+                        .commit();
+
+            }else{
+                v.getContext().startActivity(intent);
+            }
+
         }
 
         @Override

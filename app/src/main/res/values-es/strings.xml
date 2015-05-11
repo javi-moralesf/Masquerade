@@ -6,7 +6,7 @@
     <string name="action_joint">Unirte</string>
     <string name="action_new_chat">Nuevo chat</string>
     <string name="chat_initial_message">Masquerade!</string>
-    <string name="chat_user_added">Han entrado gente nueva!</string>
+    <string name="chat_user_added">Ha entrado gente nueva!</string>
     <string name="chat_waiting_others">Esperando a más gente...</string>
     <string name="invalid_key">Clave incorrecta. La clave ha de tener al menos 3 dígitos.</string>
     <string name="join_insert_code">Inserta el código</string>
@@ -26,4 +26,9 @@
     <string name="title_activity_join">Unirte a Masquerade</string>
     <string name="title_activity_new_chat">Nueva Masquerade</string>
     <string name="set_chat_name">Ponle un nombre a la Masquerade</string>
+    <string name="action_settings">Conócenos</string>
+    <string name="tutorial_exit">Pulsa el botón atrás para salir del tutotial</string>
+    <string name="title_activity_tutorial">Tutorial</string>
+    <string name="action_tutorial">Tutorial</string>
+    <string name="action_tutorial_done">Salir del tutorial</string>
 </resources>

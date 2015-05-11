@@ -1,15 +1,11 @@
-package com.moralesf.masquerade.android.Mask;
+package com.moralesf.masquerade.android.mask;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +14,9 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.ApiHelper;
-import com.moralesf.masquerade.android.Chat.ChatActivity;
-import com.moralesf.masquerade.android.data.MasqueradeApi;
+import com.moralesf.masquerade.android.chat.ChatActivity;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
+import com.moralesf.masquerade.android.list.ListActivity;
 import com.moralesf.masquerade.java.Api.Mask.MaskCreateRequest;
 import com.moralesf.masquerade.java.Api.Mask.MaskCreateResponse;
 import com.moralesf.masquerade.java.Key.KeyGen;
@@ -33,9 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Scheduler;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 
 /**
@@ -117,8 +111,11 @@ public class MaskFragment extends Fragment {
                 c.moveToFirst();
 
                 final long _id = c.getLong(0);
-                ChatActivity.startActivity(getActivity(), final_title, key, _id, 0);
-
+                if(ListActivity.mTwoPane){
+                    getActivity().finish();
+                }else{
+                    ChatActivity.startActivity(getActivity(), final_title, key, _id, 0);
+                }
 
                 apiHelper.getApi().maskCreate(token, new MaskCreateRequest(key))
                         .subscribe(new Action1<MaskCreateResponse>() {

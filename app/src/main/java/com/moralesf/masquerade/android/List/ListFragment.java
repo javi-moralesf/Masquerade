@@ -1,7 +1,6 @@
-package com.moralesf.masquerade.android.List;
+package com.moralesf.masquerade.android.list;
 
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.os.Bundle;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,16 +16,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.flurry.android.FlurryAgent;
 import com.moralesf.masquerade.R;
-import com.moralesf.masquerade.android.Mask.MaskActivity;
-import com.moralesf.masquerade.android.data.MasqueradeContract;
+import com.moralesf.masquerade.android.mask.MaskActivity;
 import com.moralesf.masquerade.android.data.MasqueradeContract.MaskEntry;
 
 import java.util.HashMap;
@@ -43,6 +37,8 @@ public class ListFragment extends Fragment implements LoaderManager.LoaderCallba
     private RecyclerView listRecyclerView;
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager listLayoutManager;
+
+    private static final String SELECTED_KEY = "selected_position";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -61,6 +57,10 @@ public class ListFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         listAdapter = new ListAdapter(getActivity(), data);
         listRecyclerView.setAdapter(listAdapter);
+        if (listAdapter.sPosition != -1) {
+            listRecyclerView.smoothScrollToPosition(listAdapter.sPosition);
+        }
+
     }
 
     @Override
@@ -96,6 +96,10 @@ public class ListFragment extends Fragment implements LoaderManager.LoaderCallba
         listLayoutManager = new LinearLayoutManager(getActivity());
         listRecyclerView.setLayoutManager(listLayoutManager);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
+            listAdapter.sPosition = savedInstanceState.getInt(SELECTED_KEY);
+        }
+
         return rootView;
     }
 
@@ -109,6 +113,7 @@ public class ListFragment extends Fragment implements LoaderManager.LoaderCallba
         int position = -1;
         try {
             position = listAdapter.getPosition();
+            listAdapter.sPosition = position;
         } catch (Exception e) {
             Log.d(TAG, e.getLocalizedMessage(), e);
             return super.onContextItemSelected(item);
@@ -181,6 +186,17 @@ public class ListFragment extends Fragment implements LoaderManager.LoaderCallba
         });
 
         alert.show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // When tablets rotate, the currently selected list item needs to be saved.
+        // When no item is selected, mPosition will be set to Listview.INVALID_POSITION,
+        // so check for that before storing.
+        if (listAdapter.sPosition != ListView.INVALID_POSITION) {
+            outState.putInt(SELECTED_KEY, listAdapter.sPosition);
+        }
+        super.onSaveInstanceState(outState);
     }
 
 }

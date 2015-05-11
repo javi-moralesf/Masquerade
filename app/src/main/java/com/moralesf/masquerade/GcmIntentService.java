@@ -10,15 +10,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.moralesf.masquerade.android.Chat.ChatActivity;
+import com.moralesf.masquerade.android.chat.ChatActivity;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GcmIntentService extends IntentService {
@@ -110,12 +111,18 @@ public class GcmIntentService extends IntentService {
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        if(!isForeground("com.moralesf.masquerade")){
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = pm.isScreenOn();
+
+        if(!isForeground("com.moralesf.masquerade") || !isScreenOn){
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.ic_masquerade_notification)
                             .setContentTitle(title)
                             .setColor(getResources().getColor(R.color.primary))
+                            .setSound(alarmSound)
                             .setAutoCancel(true)
                             .setStyle(new NotificationCompat.BigTextStyle()
                                     .bigText(msg))

@@ -3,7 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:fillViewport="true"
-    tools:context="com.moralesf.masquerade.android.Mask.MaskFragment">
+    tools:context="com.moralesf.masquerade.android.mask.MaskFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

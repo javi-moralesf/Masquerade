@@ -1,4 +1,4 @@
-package com.moralesf.masquerade.android.Chat;
+package com.moralesf.masquerade.android.chat;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -27,9 +27,6 @@ import com.moralesf.masquerade.R;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
 import com.moralesf.masquerade.java.Api.Chat.ChatSendRequest;
 import com.moralesf.masquerade.java.Api.Chat.ChatSendResponse;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import rx.functions.Action1;
 
@@ -60,6 +57,7 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
                              Bundle savedInstanceState) {
 
         Intent intent = getActivity().getIntent();
+        Bundle bundle = this.getArguments();
 
         apiHelper = new ApiHelper(getActivity());
 
@@ -67,6 +65,16 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
         if(intent != null && intent.hasExtra(Intent.EXTRA_TITLE)){
             String title = intent.getStringExtra(Intent.EXTRA_TITLE);
             getActivity().setTitle(title);
+        }
+        else if(bundle.containsKey(Intent.EXTRA_TITLE)){
+            String title = bundle.getString(Intent.EXTRA_TITLE);
+            getActivity().setTitle(title);
+        }
+
+        if(intent != null && intent.hasExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID)){
+            mask_id = intent.getLongExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, 0L);
+        }else if(bundle.containsKey(MasqueradeContract.ChatEntry.COLUMN_MASK_ID)){
+            mask_id = bundle.getLong(MasqueradeContract.ChatEntry.COLUMN_MASK_ID);
         }
 
 
@@ -85,11 +93,12 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
                 if (!edit_txt.isFocusable()) {
                     return false;
                 }
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    sendMessage(edit_txt.getText().toString());
-                    edit_txt.setText("");
+                if(event != null){
+                    edit_txt.append("\n</br>");
                     return true;
                 }
+
+                sendMessage(edit_txt.getText().toString());
                 return true;
             }
         });
@@ -113,9 +122,7 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
             }
         });
 
-        if(intent != null && intent.hasExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID)){
-            mask_id = intent.getLongExtra(MasqueradeContract.ChatEntry.COLUMN_MASK_ID, 0L);
-        }
+
 
         return rootView;
     }
@@ -129,6 +136,8 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
         if(text.length() == 0){
             return;
         }
+        edit_txt.setText("");
+        text = text.replace("\n", "<br />");
 
         FlurryAgent.logEvent("chat_sent");
 
@@ -187,11 +196,12 @@ public class ChatFragment extends Fragment implements LoaderManager.LoaderCallba
                 chatRecyclerView.setAdapter(chatAdapter);
                 break;
             case MASK_LOADER:
-                data.moveToFirst();
-                mask_api_id = data.getInt(MasqueradeContract.MaskEntry.INDEX_COLUMN_API_ID);
+                if(data.getCount() > 0){
+                    data.moveToFirst();
+                    mask_api_id = data.getInt(MasqueradeContract.MaskEntry.INDEX_COLUMN_API_ID);
+                }
                 break;
         }
-
     }
 
     @Override

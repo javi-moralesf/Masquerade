@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
     android:gravity="bottom"
-    tools:context="com.moralesf.masquerade.android.Chat.ChatFragment"
+    tools:context="com.moralesf.masquerade.android.chat.ChatFragment"
     >
 
     <android.support.v7.widget.RecyclerView
@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:background="@color/primary_light"
@@ -25,14 +25,15 @@
         <EditText
             android:id="@+id/new_chat_chat_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:hint="22/12/2011 18:05:37"
+            android:maxLength="999999999"
+            android:maxLines="5"
             android:gravity="bottom"
-            android:singleLine="true"
             android:textColor="@color/text_secondary"
             android:drawableEnd="@drawable/ic_action_send"
             android:drawableRight="@drawable/ic_action_send"
-            android:imeOptions="actionDone"
+            android:imeOptions="normal"
             />
     </LinearLayout>
 

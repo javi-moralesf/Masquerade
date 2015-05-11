@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Masquerade</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">About</string>
     <string name="action_new_chat">New chat</string>
     <string name="title_activity_new_chat">New Masquerade</string>
     <string name="new_chat_created">Create a Masquerade</string>
     <string name="set_chat_name">Set a name for this Masquerade</string>
     <string name="title_activity_chat">Private Masquerade</string>
-    <string name="content_authority">com.moralesf.masquerade</string>
+    <string name="content_authority" translatable="false">com.moralesf.masquerade</string>
     <string name="action_chat_rename">Rename chat</string>
-    <string name="api_host">http://getmasquerade.com</string>
+    <string name="api_host" translatable="false">http://getmasquerade.com</string>
     <string name="action_joint">Join</string>
     <string name="action_join">Join</string>
     <string name="title_activity_join">Join Masquerade</string>
@@ -29,5 +28,9 @@
     <string name="chat_waiting_others">Waiting for other people...</string>
     <string name="chat_initial_message">Masquerade!</string>
     <string name="chat_user_added">New users added!</string>
-    <string name="author"><![CDATA[Javi Morales F <@javi_moralesf>]]></string>
+    <string name="author" translatable="false"><![CDATA[Javi Morales F <@javi_moralesf>]]></string>
+    <string name="tutorial_exit">Press Back button to exit tutorial</string>
+    <string name="title_activity_tutorial">Tutorial</string>
+    <string name="action_tutorial">Tutorial</string>
+    <string name="action_tutorial_done">End tutorial</string>
 </resources>

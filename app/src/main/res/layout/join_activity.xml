@@ -1,5 +1,7 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-    android:name="com.moralesf.masquerade.android.Join.JoinFragment"
-    tools:layout="@layout/join_fragment" android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/join_container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.moralesf.masquerade.android.join.JoinActivity"
+tools:ignore="MergeRootFrame" />

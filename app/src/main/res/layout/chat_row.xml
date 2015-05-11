@@ -27,6 +27,7 @@
             android:textSize="15sp"
             tools:text="Hola! que tal estás? yo me llamo paquito chocolatero. Tu como te llamas? quieres ser mi amigo?"
             android:textColor="@color/text_primary"
+            android:autoLink="all"
             />
 
         <TextView

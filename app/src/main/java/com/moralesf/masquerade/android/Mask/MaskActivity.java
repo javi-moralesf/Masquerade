@@ -1,4 +1,4 @@
-package com.moralesf.masquerade.android.Mask;
+package com.moralesf.masquerade.android.mask;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -13,8 +13,6 @@ import com.moralesf.masquerade.ApiHelper;
 import com.moralesf.masquerade.FlurryHelper;
 import com.moralesf.masquerade.R;
 import com.moralesf.masquerade.android.data.MasqueradeContract;
-import com.moralesf.masquerade.java.Api.Mask.MaskCreateRequest;
-import com.moralesf.masquerade.java.Api.Mask.MaskCreateResponse;
 import com.moralesf.masquerade.java.Api.Mask.MaskLeaveRequest;
 import com.moralesf.masquerade.java.Api.Mask.MaskLeaveResponse;
 

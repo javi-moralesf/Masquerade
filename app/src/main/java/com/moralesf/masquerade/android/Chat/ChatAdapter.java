@@ -1,4 +1,4 @@
-package com.moralesf.masquerade.android.Chat;
+package com.moralesf.masquerade.android.chat;
 
 import android.content.Context;
 import android.database.Cursor;
