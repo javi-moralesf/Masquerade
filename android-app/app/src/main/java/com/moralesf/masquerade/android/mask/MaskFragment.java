@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
@@ -37,6 +38,9 @@ import rx.functions.Action1;
  */
 public class MaskFragment extends Fragment {
 
+    private static final String MASK_KEYGEN_KEY = "keygen_tv";
+    private TextView chat_key_tv;
+
     public MaskFragment() {
     }
 
@@ -56,14 +60,23 @@ public class MaskFragment extends Fragment {
             existing_codes.add(code);
         }
 
-        KeyGen gen = new KeyGen(2);
-        gen.setFalsePositives(existing_codes);
+        String tmp_key = "";
 
-        final String key = new StringBuilder()
+        if(savedInstanceState != null){
+            tmp_key = savedInstanceState.getString(MASK_KEYGEN_KEY);
+        }else{
+            KeyGen gen = new KeyGen(2);
+            gen.setFalsePositives(existing_codes);
+
+            tmp_key = new StringBuilder()
                     .append(apiHelper.getKey())
                     .append("@")
                     .append(gen.getKey())
                     .toString();
+        }
+
+        final String key = tmp_key;
+
 
 
 
@@ -71,7 +84,7 @@ public class MaskFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.mask_fragment, container, false);
 
-        TextView chat_key_tv = (TextView) rootView.findViewById(R.id.chat_key);
+        chat_key_tv = (TextView) rootView.findViewById(R.id.chat_key);
         chat_key_tv.setText(key);
 
         final EditText chat_name_et = (EditText) rootView.findViewById(R.id.new_chat_chat_title);
@@ -135,5 +148,14 @@ public class MaskFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // When tablets rotate, the currently selected list item needs to be saved.
+        // When no item is selected, mPosition will be set to Listview.INVALID_POSITION,
+        // so check for that before storing.
+        outState.putString(MASK_KEYGEN_KEY, chat_key_tv.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 }
